@@ -16,6 +16,17 @@ public class PongPaddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Move();
+    }
+
+
+
+    public void Move()
+    {
+
+        if(gameObject.name == "P1")
+    
+       {
         float input = Input.GetAxis("V2");
 
          Vector3 pos = transform.position;
@@ -29,5 +40,22 @@ public class PongPaddle : MonoBehaviour
             pos.y = MinMovement;
 
          transform.position = pos;
+         }
+         else 
+         {
+            float input = Input.GetAxis("V1");
+
+         Vector3 pos = transform.position;
+
+         
+        pos.y += input * Speed * Time.deltaTime;
+
+        if (pos.y > MaxMovement)
+            pos.y = MaxMovement;
+        else if (pos.y < MinMovement)
+            pos.y = MinMovement;
+
+         transform.position = pos;
+         }
     }
 }
