@@ -7,10 +7,13 @@ public class PongPaddle : MonoBehaviour
      public float Speed = 2.0f;
     public float MaxMovement = 5.9f;
     public float MinMovement = -3.66f;
+
+    //lets call the gamemanager
+    public GameManager gameMan;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameMan = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -57,5 +60,9 @@ public class PongPaddle : MonoBehaviour
 
          transform.position = pos;
          }
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        gameMan.UpdateBounce(1);
     }
 }

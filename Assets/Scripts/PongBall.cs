@@ -6,6 +6,7 @@ using Debug = UnityEngine.Debug;
 public class PongBall : MonoBehaviour
 {
     private Rigidbody spirit;
+    public GameManager gameMan;
 
     public Vector3 dir;
     public float randomiaX; 
@@ -15,13 +16,14 @@ public class PongBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameMan = GameObject.Find("GameManager").GetComponent<GameManager>();
         spirit = GetComponent<Rigidbody>();
         StarDir();
        
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
     }
@@ -42,10 +44,23 @@ public class PongBall : MonoBehaviour
 
         if (other.gameObject.CompareTag("Paddle"))
        { 
-        velocity += velocity.normalized * 0.5f;
+        velocity += velocity.normalized * 0.9f;
         Debug.Log("velocity: " + velocity + " paddle");
 
         }
         spirit.velocity = velocity;
+
+
     }
+     void OnCollisionEnter(Collision collision)
+     {
+         if (collision.gameObject.CompareTag("Sides"))
+         {
+            Destroy(gameObject);
+            gameMan.ballOut = false;
+            gameMan.ballCount--;
+            Debug.Log(gameMan.ballCount);
+            gameMan.BallWatch();
+         }
+     }
 }
