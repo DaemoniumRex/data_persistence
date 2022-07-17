@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +12,26 @@ public class GameManager : MonoBehaviour
     public bool ballOut;
     public int ballCount;
     public TextMeshProUGUI bounceText;
+    public TextMeshProUGUI daTeamName;
     public GameObject ball3;
     public GameObject ball2;
+
+
+    //mainamanref
+    public MainManManager Instance;
+
+    //bring the highscore table 
+    
     void Start()
     {
         ballOut = false;
         ballCount = 3;
+
+        //intentamos establecer el texto en el gui.
+        //Debug.Log(MainManManager.Instance.teamName + "dude");
+        daTeamName.text = "Team " + MainManManager.Instance.teamName;
+
+       
     }
 
     // Update is called once per frame
@@ -45,6 +60,12 @@ public class GameManager : MonoBehaviour
         }
         else if (ballCount == 0)
         {
+
+            MainManManager.Instance.Tscore = bounceCount;
+            Debug.Log(MainManManager.Instance.Tscore + "cuenta");
+            SceneManager.LoadScene(2);
+
+            
             
         }
     }

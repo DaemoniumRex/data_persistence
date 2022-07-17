@@ -32,7 +32,7 @@ public class PongBall : MonoBehaviour
     {
        randomiaX = Random.Range(-5f, 5f);
      randomiaY = Random.Range(-5f, 5f);
-     spirit.AddForce(new Vector3(randomiaX, randomiaY, 0)  , ForceMode.Impulse);
+     spirit.AddForce(new Vector3(randomiaX+ 5 , randomiaY + 5, 0)  , ForceMode.Impulse);
       Debug.Log("velocity: " + spirit.velocity);
     }
 
@@ -62,5 +62,6 @@ public class PongBall : MonoBehaviour
             Debug.Log(gameMan.ballCount);
             gameMan.BallWatch();
          }
+        
      }
 }
